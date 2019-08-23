@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>img view</title>
+  <style>
+      [v-cloak] {
+          display: none;
+      }
+  </style>
+
+</head>
+
+<body>
+<div id="imgView">
+  <div>
+    <button @click="sortByCategory">sort by category</button>
+    <button @click="sortByDate">sort by date</button>
+  </div>
+  <ul v-for="img in imgList" draggable :list="imgList" @start="checkMove">
+    <li v-cloak>
+      <span>{{img.name}}</span> 
+      <span>{{img.date}}</span> 
+      <span>{{img.category}}</span>
+    </li>
+  </ul>
+  <div>
+    <ul v-show="isSortByCategory">
+      <li>to tour</li>
+      <li>to video</li>
+      <li>to sports</li>
+      <li>to tv</li>
+      <li>to pets</li>
+    </ul>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/15.0.0/vuedraggable.min.js"></script>
+<script src="imgView.js"></script>
+</body>
+</html>
