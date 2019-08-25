@@ -124,8 +124,18 @@ new Vue({
         this.isSortByCategory = true;
         sortBykey(this.imgList,'category');
       },
-      checkMove:function(e){
-        console.log(e);
+      allowDrop:function(e){
+        e.preventDefault();
+      },
+      drag:function(e){
+        var index = e.target.getAttribute('index');
+        e.dataTransfer.setData('index',index);
+      },
+      drop:function(e){
+        e.preventDefault();
+        var index = e.dataTransfer.getData('index');
+        var tarCategory = e.target.getAttribute('type');
+        this.imgList[index].category = tarCategory;
       }
     }
 });
