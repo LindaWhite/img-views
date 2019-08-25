@@ -8,6 +8,23 @@
       [v-cloak] {
           display: none;
       }
+      #imgList,#dropTarBox{
+        margin: 0;
+        padding: 0;
+      }
+      #imgList .imgs{
+        list-style: none;
+        display: inline-block;
+        width: 220px;
+      }
+      #dropTarBox li{
+        list-style: none;
+        display: inline-block;
+        width: 220px;
+        height: 80px;
+        border: 1px solid #000;
+        margin: 10px 0;
+      }
   </style>
 
 </head>
@@ -18,25 +35,24 @@
     <button @click="sortByCategory">sort by category</button>
     <button @click="sortByDate">sort by date</button>
   </div>
-  <ul v-for="img in imgList" draggable :list="imgList" @start="checkMove">
-    <li v-cloak>
+  <ul id="imgList">
+    <li v-cloak v-for="(img,index) in imgList"  draggable="true" @dragstart="drag" v-bind:index="index" class="imgs">
       <span>{{img.name}}</span> 
       <span>{{img.date}}</span> 
       <span>{{img.category}}</span>
     </li>
   </ul>
   <div>
-    <ul v-show="isSortByCategory">
-      <li>to tour</li>
-      <li>to video</li>
-      <li>to sports</li>
-      <li>to tv</li>
-      <li>to pets</li>
+    <ul v-show="isSortByCategory" id="dropTarBox">
+      <li @drop="drop" @dragover="allowDrop" type="tour">to tour</li>
+      <li @drop="drop" @dragover="allowDrop" type="video">to video</li>
+      <li @drop="drop" @dragover="allowDrop" type="sports">to sports</li>
+      <li @drop="drop" @dragover="allowDrop" type="tv">to tv</li>
+      <li @drop="drop" @dragover="allowDrop" type="pets">to pets</li>
     </ul>
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/15.0.0/vuedraggable.min.js"></script>
 <script src="imgView.js"></script>
 </body>
 </html>
